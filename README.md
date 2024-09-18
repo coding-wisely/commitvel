@@ -1,7 +1,6 @@
 # Commitvel- your git commit friendly tool! 🚀
 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/coding-wisely/commitvel.svg?style=flat-square)](https://packagist.org/packages/coding-wisely/commitvel)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/coding-wisely/commitvel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/coding-wisely/commitvel/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/coding-wisely/commitvel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/coding-wisely/commitvel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/coding-wisely/commitvel.svg?style=flat-square)](https://packagist.org/packages/coding-wisely/commitvel)
