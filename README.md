@@ -1,24 +1,40 @@
-# :package_description
+# Commitvel- your git commit friendly tool! 🚀
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/coding-wisely/commitvel.svg?style=flat-square)](https://packagist.org/packages/coding-wisely/commitvel)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/coding-wisely/commitvel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/coding-wisely/commitvel/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/coding-wisely/commitvel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/coding-wisely/commitvel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/coding-wisely/commitvel.svg?style=flat-square)](https://packagist.org/packages/coding-wisely/commitvel)
+
+
+Commitvel is a tailor-made package for Laravel developers to streamline their git workflow, ensuring code quality and efficiency without relying on git hooks. With a simple console command, Commitvel automates the mundane tasks of preparing your code for version control. Here's what Commitvel brings to the table:
+
+
+## Key Features:
+
+### Change Detection: 
+Effortlessly identifies and stages your code changes. 📋 Commitvel manually detects your changes, ensuring no modification goes unnoticed.
+
+### Code Fixing with Laravel Pint: 
+Automatically formats and styles your code with Laravel Pint. 🧼 Say goodbye to manual code styling—Commitvel makes your code shine with one command.
+
+### Automated Unit Tests: 
+
+Executes your unit tests to guarantee code reliability. 🔍 Commitvel integrates with Pest to run tests, giving you peace of mind that your changes won't break existing functionality.
+
+### Smart Committing: 
+
+Helps you compose meaningful commit messages and stages your code changes for you. 📝 Commitvel guides you through the process, ensuring your git history is clean and informative.
+
+### Seamless Pushing: 
+
+Pushes your commits to the remote repository effortlessly. 🌐 Commitvel makes git pushing as simple as a single command, freeing you from the intricacies of git.
+
+
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/Commitvel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/Commitvel)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -29,20 +45,20 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require coding-wisely/commitvel
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
+php artisan vendor:publish --tag="commitvel-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-config"
+php artisan vendor:publish --tag="commitvel-config"
 ```
 
 This is the contents of the published config file:
@@ -55,14 +71,14 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+php artisan vendor:publish --tag="commitvel-views"
 ```
 
 ## Usage
 
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+$commitvel = new CodingWisely\Commitvel();
+echo $commitvel->echoPhrase('Hello, CodingWisely!');
 ```
 
 ## Testing
@@ -85,7 +101,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Vladimir Nikolic](https://github.com/coding-wisely)
 - [All Contributors](../../contributors)
 
 ## License
