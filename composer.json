@@ -1,6 +1,7 @@
 {
     "name": "coding-wisely/commitvel",
     "description": "A Laravel package to assist with Git operations and code quality checks.",
+    "version": "1.0.1",
     "keywords": [
         "coding-wisely",
         "git hooks",
