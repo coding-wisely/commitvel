@@ -5,6 +5,7 @@ namespace CodingWisely\Commitvel\Commands;
 use Illuminate\Console\Command;
 use Laravel\Prompts\Concerns\Colors;
 use Symfony\Component\Process\Process;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiSelect;
 use function Laravel\Prompts\spin;
@@ -15,11 +16,12 @@ class CommitvelCommand extends Command
     use Colors;
 
     protected $signature = 'cw:commitvel';
+
     protected $description = 'Like a pre-commit hook for running Pint, PHPPest, and managing Git operations written with laravel prompt';
 
     public function handle(): void
     {
-        if (!$this->hasChanges()) {
+        if (! $this->hasChanges()) {
             $this->tellJokeAndExit();
         }
 
@@ -34,7 +36,7 @@ class CommitvelCommand extends Command
     protected function hasChanges(): bool
     {
         $changes = shell_exec('git status --porcelain');
-        $statusMessage = "Initial git status changes: \n" . $this->formatGitStatus($changes);
+        $statusMessage = "Initial git status changes: \n".$this->formatGitStatus($changes);
 
         if (preg_match('/^\?\?/', $changes)) {
             $this->info($this->red($statusMessage));
@@ -42,7 +44,7 @@ class CommitvelCommand extends Command
             $this->info($statusMessage);
         }
 
-        return !empty(trim($changes));
+        return ! empty(trim($changes));
     }
 
     protected function formatGitStatus(string $status): string
@@ -50,9 +52,10 @@ class CommitvelCommand extends Command
         $lines = array_filter(explode("\n", $status));
         foreach ($lines as &$line) {
             if (str_starts_with(trim($line), '??')) {
-                $line = $this->bgRed($this->white('NEW')) . ' ' . ltrim($line, '?? ');
+                $line = $this->bgRed($this->white('NEW')).' '.ltrim($line, '?? ');
             }
         }
+
         return implode("\n", $lines);
     }
 
@@ -81,11 +84,11 @@ class CommitvelCommand extends Command
             'Attempting an empty commit? It’s as productive as a screen door on a submarine! 🛳️🚪',
             'Committing no changes? That’s like trying to tune a guitar with no strings! 🎸❌',
             'No changes? That’s like sending a love letter to an empty mailbox! 💌📪',
-            "Trying to commit nothing? That’s as useful as a waterproof teabag! ☕🚫",
+            'Trying to commit nothing? That’s as useful as a waterproof teabag! ☕🚫',
             'No changes to commit? Even ghosts leave more trace! 👻🕵️‍♂️',
             'Attempting an empty commit? That’s like cooking with imaginary ingredients! 🍳🥄',
             'No changes in your commit? That’s like racing in a stationary car! 🚗🛑',
-            "Committing air? That’s like showing up to a concert with earplugs in! 🎤👂",
+            'Committing air? That’s like showing up to a concert with earplugs in! 🎤👂',
             'Trying to commit with zero changes? That’s like playing soccer with an invisible ball! ⚽🕵️‍♀️',
         ];
 
@@ -111,9 +114,8 @@ class CommitvelCommand extends Command
         string $successMessage,
         string $preCommand = '',
         string $preMessage = ''
-    ): void
-    {
-        if (!file_exists(base_path($path))) {
+    ): void {
+        if (! file_exists(base_path($path))) {
             if (confirm($confirmMessage, true)) {
                 if ($preCommand) {
                     $this->info($preMessage);
@@ -133,8 +135,9 @@ class CommitvelCommand extends Command
         $outputFiles = $this->runTool('Laravel Pint', './vendor/bin/pint --dirty', '/^\s+√ (\S+)/m');
 
         foreach ($outputFiles as $file) {
-            if (!is_writable($file)) {
+            if (! is_writable($file)) {
                 $this->warn("File $file is not writable.");
+
                 continue;
             }
 
@@ -153,8 +156,7 @@ class CommitvelCommand extends Command
         string $regexPattern = '',
         string $errorKeyword1 = 'FAIL',
         string $errorKeyword2 = 'ERROR'
-    ): array
-    {
+    ): array {
         $outputFiles = [];
         if (confirm("Would you like to run $toolName?", true)) {
             spin(
@@ -185,10 +187,10 @@ class CommitvelCommand extends Command
     {
         $untrackedFiles = $this->getUntrackedFiles();
 
-        if (!empty($untrackedFiles)) {
+        if (! empty($untrackedFiles)) {
             $this->info($this->red('Untracked files found:'));
             foreach ($untrackedFiles as $file) {
-                $this->info($this->red('  ' . $file));
+                $this->info($this->red('  '.$file));
             }
 
             array_unshift($untrackedFiles, 'Select All', 'Select None');
@@ -209,7 +211,7 @@ class CommitvelCommand extends Command
             }
 
             $filesToDelete = array_diff($untrackedFiles, $selectedFiles, ['Select All', 'Select None']);
-            if (!empty($filesToDelete) && confirm('Would you like to delete the unselected new files? You can delete it manually if you choose no.', false)) {
+            if (! empty($filesToDelete) && confirm('Would you like to delete the unselected new files? You can delete it manually if you choose no.', false)) {
                 foreach ($filesToDelete as $file) {
                     unlink($file);
                     $this->info("Deleted file: $file");
@@ -228,16 +230,17 @@ class CommitvelCommand extends Command
 
     protected function stageFile(string $file): void
     {
-        shell_exec('git add ' . escapeshellarg($file));
-        $stagedStatus = shell_exec('git status --porcelain ' . escapeshellarg($file));
-        if (!empty($stagedStatus)) {
-            $this->info("Staging status for $file: \n" . $stagedStatus);
+        shell_exec('git add '.escapeshellarg($file));
+        $stagedStatus = shell_exec('git status --porcelain '.escapeshellarg($file));
+        if (! empty($stagedStatus)) {
+            $this->info("Staging status for $file: \n".$stagedStatus);
         }
     }
 
     protected function getUntrackedFiles(): array
     {
         $output = shell_exec('git ls-files --others --exclude-standard');
+
         return array_filter(explode("\n", $output));
     }
 
@@ -250,28 +253,27 @@ class CommitvelCommand extends Command
         }
 
         $commitMessage = text('Enter the commit message');
-        if (!$commitMessage) {
+        if (! $commitMessage) {
             $this->error('Commit message cannot be empty.');
             exit(1);
         }
 
-        shell_exec('git commit -m ' . escapeshellarg($commitMessage));
+        shell_exec('git commit -m '.escapeshellarg($commitMessage));
         $this->info('Changes committed.');
 
         $currentBranch = $this->getCurrentBranch();
 
-
         if (confirm("We will push this to branch [$currentBranch].", true)) {
             $this->info("Pushing code to branch $currentBranch...");
 
-            spin(fn() => $this->pushToBranch($currentBranch), "Pushing code to $currentBranch...");
+            spin(fn () => $this->pushToBranch($currentBranch), "Pushing code to $currentBranch...");
 
             $commitHash = trim(shell_exec('git log -1 --format="%H"'));
             $gitUserName = trim(shell_exec('git config user.name'));
             $this->info("Commit hash: $commitHash");
             $this->info("Pushed by: $gitUserName");
         } else {
-            $this->info("Exiting. No changes will be pushed to the server, but changes have been committed locally.");
+            $this->info('Exiting. No changes will be pushed to the server, but changes have been committed locally.');
         }
     }
 
